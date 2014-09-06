@@ -10,7 +10,7 @@ Make three files:
 * tabs.css
 
 In tabs.html, include the following HTML boilerplate:
-<pre><code><!DOCTYPE html>
+    <!DOCTYPE html>
 <html>
   <head>
     <title></title>
@@ -18,6 +18,6 @@ In tabs.html, include the following HTML boilerplate:
   <body>
     
   </body>
-</html></code></pre>
+</html>
 
 ...and add a ul with the class 'tabs' inside the body. Between the head tags, include tags to require your js and css files, as well as jQuery.
