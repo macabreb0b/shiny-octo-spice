@@ -4,7 +4,7 @@ Let's use our knowledge of jQuery to make some plugins - or
 modular bits of code that we can re-use to spiff up our websites!
 
 ## Tabs
-Make three files: 
+For each of our plugins, create a folder and create three files for our html, JavaScript and CSS. Let's start with: 
 * tabs.html
 * tabs.js
 * tabs.css
@@ -21,12 +21,15 @@ In tabs.html, include the following HTML boilerplate:
   </body>
 </html>
 ```
-
-...and add a ul with the class 'tabs' inside the body. Between the head tags, include tags to require your js and css files, as well as jQuery.
+Between the head tags, include tags to require your js and css files, as well as jQuery.
 
 You can download the jQuery source file from [jQuery.com](http://jquery.com/download/).
 
-Or you can use Google's CDN to access the source code - include the script tag that they have on their site.
+Or you can use Google's CDN to access the source code - include the script tag that they have on their site. (A quick search for Google jQuery CDN should get you there!)
+
+You can also include a CSS-reset, to normalize the CSS that your browser comes pre-installed with.
+`<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.17.2/build/cssreset/cssreset-min.css">
+`
 
 
 ## Carousel
