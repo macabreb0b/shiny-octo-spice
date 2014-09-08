@@ -68,15 +68,63 @@ It's pretty common to want to switch content out with the use of tabs. (Think of
 The site we're working on today will let us tab back and forth to view information on different types of dog breeds. Let's make a plugin that will help us accomplish this.  
 
 Create your HTML content:
+
 * If you haven't already, create a `ul` with the class `tabs`.
 * Below this, create a `div`, give it the id `content-tabs`.
-* Inside of our div#content-tabs, make three or more divs to hold our tabs' content. Give each of these the class `tab-pane`. 
+* Inside of our `div#content-tabs`, make three or more `div`s to hold our tabs' content. Give each of these the class `tab-pane`. 
 * Add a `p` tag within each, and add some text about your favorite breeds of dog. (You might find some good [dog breed info here](http://www.justdogbreeds.com/all-dog-breeds.html)!)
-* Give each of the `.tab-pane` divs a unique `id` describing its content. perhaps the breed of dog will do!
+* Give each of the `.tab-pane`s a unique `id` describing its content. perhaps the breed of dog will do!
 * Inside of our `ul.tabs`, add as many `li` tags as there are `tab-pane`s. Add an anchor tag (`a`) inside each one. Give each of these an href that points to its corresponding fragment. (These are the ids of our `.tab-pane` elements.) Your link should look something like: `<a href='#chihuahua'>Chihuahua</a>`
 
+Now open your HTML file in the browser - you should see all of your links, and all of your content! 
+
+Let's make some decisions about how we're going to signal which tabs should be displayed. We will use jQuery to give the class 'active' to the tab that we want to see. To initialize our app so that it starts on the first tab, give the first `div.tab-pane` the class 'active.' Also give the corresponding `a` tag the class 'active.'
+
+To display only the active content, lets add some CSS rules. In tabs.css, use selectors to add the following properties appropriately.
+
+* All links with the class 'active' inside of something with the class 'tabs' should have `font-weight: bold;`.
+* All `div`s with the class 'tab-pane' should have `display:none;`.
+* All `div`s with both class 'tab-pane' and class 'active' should have `display: block;`.
+
+Now refresh the page - you should see _only_ the information about your first dog breed, and its corresponding link should be bold. Let's set up our JavaScript file so that we can see information on other breeds!
+
+Go to tabs.js, and let's set up the constructor function for our plugin.
+
+* Our constructor function is `$.Tabs = function(el) {}`. In it, lets create some instance variables.
+* The constructor will be passed a plain HTML element (el). Make this into a jQuery object and save it as `this.$el`.
+* Get the location where our content is - pull the value of data-content-tabs from `this.$el`, make it into a jQuery object, and save it as `this.$contentTabs`.
+* Get the active tab from our content tabs - save this as an ivar, making sure it's a jQuery object.
+
+Write the prototype method that we will call when our tab links get clicked, `Tabs#clickTab`.
+
+* Use instance variables to access the content tabs and list of links. Remove the class 'active' from all of these.
+* Use `$(event.currentTarget)` to get the tab that we want to make active. Add the 'active' class to the proper `div.tab-pane` and `a` tags.
+* Don't forget to prevent the link's default action, which is a page refresh.
+* In the contructor, set up our click event handler by calling `this.$el.on('click', 'a', ...)`.
+
+Refresh the page - you should have a working tab-browser!   
+
+Those transitions are a bit harsh though - let's make it feel a little smoother.
+
+Add some new CSS rules to `tabs.css`:
+
+* All `div`s with both class 'tab-pane' _and_ class 'active' should have `opacity: 1;`, and a transition property for opacity.
+* All `div`s with both class 'tab-pane' _and_ class 'transitioning' should have `display: block;`, `opacity: 0;`, and also a transition property for opacity.
+
+Now let's modify our `Tabs#clickTab` method. It will handle the link classes the same way, but now on our tabs we will use the 'transitioning' class as an interim. 
+
+* Remove class 'active' from our `$activeTab` ivar and add the class 'transitioning.'
+* Set up a one-time event (you might want to lookup jQuery's #one method) that listens for the event 'transitionend.' Give this a callback that will:
+    * Remove class 'transitioning' from the old active tab.
+    * Add class 'transitioning' to our new active tab.
+    * Use setTimeout to remove class 'transitioning' and add class 'active' to our new active tab.
+    * NB: It may be helpful to keep track of whether or not the transition is currently happening, and use this to make sure that we don't call the method again mid-transition.
+
+Good work! Call your TA over to check your work once you've got your tabs transitioning.
 
 # Carousel
+Now we will make a plugin that, when called on a list of images, will let you scroll through them carousel-style. Setup your three files in the same fashion as before, but instead of a `ul` tag, add a `div` between our `body` tags, and give it the class 'carousel.'
+
 ### HTML
 1. Make boilerplate HTML, JS, CSS
 2. Set up carousel div, item-holder div inside
