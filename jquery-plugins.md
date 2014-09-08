@@ -3,7 +3,7 @@
 Let's use our knowledge of jQuery to make some plugins - or
 modular bits of code that we can re-use to spiff up our websites!
 
-## Tabs
+## Setup
 For each of our plugins, create a folder and create three files for our html, JavaScript and CSS. Let's start with: 
 * tabs.html
 * tabs.js
@@ -63,7 +63,20 @@ run our code after the document loads:
 
 Now we are ready to go!
 
-## Carousel
+# Tabs
+It's pretty common to want to switch content out with the use of tabs. (Think of the last time you used a [shopping website](http://www.staples.com/Paper-Mate-Sharpwriter-Mechanical-Pencils-7mm-Yellow-Barrel-Dozen/product_107250).)
+The site we're working on today will let us tab back and forth to view information on different types of dog breeds. Let's make a plugin that will help us accomplish this.  
+
+Create your HTML content:
+* If you haven't already, create a `ul` with the class `tabs`.
+* Below this, create a `div`, give it the id `content-tabs`.
+* Inside of our div#content-tabs, make three or more divs to hold our tabs' content. Give each of these the class `tab-pane`. 
+* Add a `p` tag within each, and add some text about your favorite breeds of dog. (You might find some good [dog breed info here](http://www.justdogbreeds.com/all-dog-breeds.html)!)
+* Give each of the `.tab-pane` divs a unique `id` describing its content. perhaps the breed of dog will do!
+* Inside of our `ul.tabs`, add as many `li` tags as there are `tab-pane`s. Add an anchor tag (`a`) inside each one. Give each of these an href that points to its corresponding fragment. (These are the ids of our `.tab-pane` elements.) Your link should look something like: `<a href='#chihuahua'>Chihuahua</a>`
+
+
+# Carousel
 ### HTML
 1. Make boilerplate HTML, JS, CSS
 2. Set up carousel div, item-holder div inside
