@@ -63,7 +63,7 @@ run our code after the document loads:
 
 Now we are ready to go!
 
-# Tabs
+# Corgi Tabs
 It's pretty common to want to switch content out with the use of tabs. (Think of the last time you used a [shopping website](http://www.staples.com/Paper-Mate-Sharpwriter-Mechanical-Pencils-7mm-Yellow-Barrel-Dozen/product_107250).)
 The site we're working on today will let us tab back and forth to view information on different types of dog breeds. Let's make a plugin that will help us accomplish this.  
 
@@ -122,14 +122,28 @@ Now let's modify our `Tabs#clickTab` method. It will handle the link classes the
 
 Good work! Call your TA over to check your work once you've got your tabs transitioning.
 
-# Carousel
+# Cat Carousel
 Now we will make a plugin that, when called on a list of images, will let you scroll through them carousel-style. Setup your three files in the same fashion as before, but instead of a `ul` tag, add a `div` between our `body` tags, and give it the class 'carousel.'
 
-### HTML
-1. Make boilerplate HTML, JS, CSS
-2. Set up carousel div, item-holder div inside
-3. add links for left and right, give them appropriate, 
-descriptive css classes
+* Give your carousel `div` a fixed height and width, and center it in the page using `margin: 0 auto;`.
+* Put another `div` inside of the carousel div. This will contain our images - give it class 'items.'
+* Grab a handful of image urls from [placekitten](http://www.placekitten.com) or [placecorgi](http://placecorgi.com/). Make sure they are all large enough to fill your carousel. Put them all in `img` tags within `div.items`.
+* Add two links to 'Previous' and 'Next' after `div.items`, and give them classes 'slide-right' and 'slide-left', respectively. You can add a '#' as the href attribute, or `javascript:void(0)`. ([More on this here](http://stackoverflow.com/questions/1291942/what-does-javascriptvoid0-mean)).
+
+Now that we have our content, open your webpage. You should see all of the images stacked on top of one another.
+
+Let's add some CSS rules to make sure we can only see one image at a time. We will follow a similar pattern to when we were making Tabs, adding and removing the class 'active' to our images.
+
+In our CSS file:
+
+* Give all `div`s with class 'items' that are direct children of `div`s with class 'carousel' the following properties: `overflow:hidden;`, `height: 100%;`, `width: 100%;`. Also give it `position: absolute;`. We will come back to why.
+* All images that are a direct child of `div`s with class 'items' that are direct descendants of `div`s with class 'carousel' should have `position:absolute;`, as well as 100% width and `top: 0;`. 
+    * When these images have the class 'active,' they should have the property `left: 0;`. Also give it a linear transition property on 'left'.
+    * Give all of these images that are _not_ 'active' `display: none;`.
+    * When these images have the class 'active' _and_ 'left,' they should have `left: -100%;`. Do the opposite for 'right.'
+
+
+
 ### CSS
 1. on parent div
 * fixed height and width, so that we can set the images' size
