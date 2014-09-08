@@ -22,15 +22,46 @@ In tabs.html, include the following HTML boilerplate:
 </html>
 ```
 Between the head tags, include tags to require your js and css files, as well as jQuery.
+```html
+<script src="./jquery-1.11.1.js"></script>
+<script src="./tabs.js"></script>
+<link href="./tabs.css" rel="stylesheet" type="text/css">
+```
 
 You can download the jQuery source file from [jQuery.com](http://jquery.com/download/).
 
 Or you can use Google's CDN to access the source code - include the script tag that they have on their site. (A quick search for Google jQuery CDN should get you there!)
 
 You can also include a CSS-reset, to normalize the CSS that your browser comes pre-installed with.
-`<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.17.2/build/cssreset/cssreset-min.css">
-`
+```html
+<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.17.2/build/cssreset/cssreset-min.css">
+```
 
+In tabs.js, include the following code to set up our plugin:
+```
+$.Tabs = function (el) { ... };
+
+$.fn.tabs = function () {
+  return this.each(function () {
+    new $.Tabs(this);
+  });
+};
+```
+
+Back in tabs.html, let's add the element that we will be calling #tabs on:
+`<ul class='tabs'></ul>`
+
+And finally, add a script tag just before the `</body>` tag, where we will
+run our code after the document loads:
+```html
+<script>
+  $(function() {
+    $('.tabs').tabs();
+  })
+</script>
+```
+
+Now we are ready to go!
 
 ## Carousel
 ### HTML
