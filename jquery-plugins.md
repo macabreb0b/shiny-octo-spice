@@ -63,7 +63,7 @@ run our code after the document loads:
 
 Now we are ready to go!
 
-# Corgi Tabs
+# Corgi Tabs :dog:
 It's pretty common to want to switch content out with the use of tabs. (Think of the last time you used a [shopping website](http://www.staples.com/Paper-Mate-Sharpwriter-Mechanical-Pencils-7mm-Yellow-Barrel-Dozen/product_107250).)
 The site we're working on today will let us tab back and forth to view information on different types of dog breeds. Let's make a plugin that will help us accomplish this.  
 
@@ -122,7 +122,7 @@ Now let's modify our `Tabs#clickTab` method. It will handle the link classes the
 
 Good work! Call your TA over to check your work once you've got your tabs transitioning.
 
-# Cat Carousel
+# Kitten Carousel :cat:
 Now we will make a plugin that, when called on a list of images, will let you scroll through them carousel-style. Setup your three files in the same fashion as before, but instead of a `ul` tag, add a `div` between our `body` tags, and give it the class 'carousel.'
 
 * Give your carousel `div` a fixed height and width, and center it in the page using `margin: 0 auto;`.
@@ -137,20 +137,25 @@ Let's add some CSS rules to make sure we can only see one image at a time. We wi
 In our CSS file:
 
 * Give all `div`s with class 'items' that are direct children of `div`s with class 'carousel' the following properties: `overflow:hidden;`, `height: 100%;`, `width: 100%;`. Also give it `position: absolute;`. We will come back to why.
-* All images that are a direct child of `div`s with class 'items' that are direct descendants of `div`s with class 'carousel' should have `position:absolute;`, as well as 100% width and `top: 0;`. 
-    * When these images have the class 'active,' they should have the property `left: 0;`. Also give it a linear transition property on 'left'.
+* All `img`s that are a direct child of `div`s with class 'items' that are direct descendants of `div`s with class 'carousel' should have `position:absolute;`, as well as 100% width and `top: 0;`.
+    * When these images have the class 'active,' they should have the property `left: 0;`. Also give it a linear `transition` property on 'left'.
     * Give all of these images that are _not_ 'active' `display: none;`.
     * When these images have the class 'active' _and_ 'left,' they should have `left: -100%;`. Do the opposite for 'right.'
+    
+That should do it for now. Refresh the page - you should not see any cats, although you should see your 'Previous' and 'Next' links. Let's go to carousel.js to start writing our plugin. 
 
+* In the constructor, take in an `el` and save it as a jQuery object.
+    * Store ivars for your images and the active index.
+    * Add class 'active' to the first image.
+* Write a `#slide` method, that will take an integer (1 or -1) to determine the direction to slide in. This method should:
+    * Update the active index.
+    * Find the current active image (old item) and the one to become active (new item).
+    * Give the new item classes 'active' and the direction it's sliding in ('right' or 'left').
+    * Give the old item the class for the opposite direction.
+    * Set an event listener on the old item for 'transitioned.' The completion callback should:
+        * Remove classes 'active' and opposite direction from the old item.
+* Write `#slideLeft` and `#slideRight` methods. These should just call `#slide`.
 
+Test out your Carousel in the browser. You may have transitioning kittens! If you don't (or if they only transition half the time), you may want to look into the [setTimeout trick](http://stackoverflow.com/questions/779379/why-is-settimeoutfn-0-sometimes-useful). (Use this to group everything that comes after adding the 'active' class to the new item in #slide.)
 
-### CSS
-1. on parent div
-* fixed height and width, so that we can set the images' size
-* margin: 0 auto; for centering
-2. on image-holder
-* position:relative;
-* overflow: hidden;
-* height / width 100%
-### JavaScript
-
+NB: You also may want to add a 'transitioning' property on your model, to make sure that the #slide method does not fire during a transition.
