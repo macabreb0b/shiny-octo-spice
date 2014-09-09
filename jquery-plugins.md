@@ -156,6 +156,8 @@ That should do it for now. Refresh the page - you should not see any cats, altho
         * Remove classes 'active' and opposite direction from the old item.
 * Write `#slideLeft` and `#slideRight` methods. These should just call `#slide`.
 
-Test out your Carousel in the browser. You may have transitioning kittens! If you don't (or if they only transition half the time), you may want to look into the [setTimeout trick](http://stackoverflow.com/questions/779379/why-is-settimeoutfn-0-sometimes-useful). (Use this to group everything that comes after adding the 'active' class to the new item in #slide.)
+Test out your Carousel in the browser. You may have transitioning kittens!  
 
-NB: You also may want to add a 'transitioning' property on your model, to make sure that the #slide method does not fire during a transition.
+If you don't (or if they only transition half the time), you may want to look into the [setTimeout trick](http://stackoverflow.com/questions/779379/why-is-settimeoutfn-0-sometimes-useful). (Use this to group everything that comes after adding the 'active' class to the new item in #slide.)
+
+NB: You also may want to keep track of whether or not your model is 'transitioning,' to make sure that the #slide method does not fire during a transition.
